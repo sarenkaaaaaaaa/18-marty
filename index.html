@@ -7,15 +7,17 @@
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #ff007a, #ffc300);
+      background: linear-gradient(135deg, #000000, #1a1a1a);
       margin: 0;
       padding: 20px;
-      color: #fff;
+      color: #e0e0e0;
       text-align: center;
     }
     h1 {
       font-size: 2.5em;
       margin-bottom: 10px;
+      color: #c0c0c0;
+      text-shadow: 0 0 8px #666;
     }
     .grid {
       display: grid;
@@ -24,64 +26,74 @@
       margin-top: 20px;
     }
     .cell {
-      background-color: rgba(255,255,255,0.1);
-      border: 2px solid #fff;
+      background: linear-gradient(145deg, #999, #666);
+      border: 2px solid #ccc;
       padding: 10px;
       font-size: 0.85em;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.2s;
+      color: #111;
+      box-shadow: inset 0 0 5px rgba(255,255,255,0.2);
     }
     .cell.active {
-      background-color: #fff;
-      color: #000;
+      background-color: #111;
+      color: #ccc;
       text-decoration: line-through;
+      border: 2px solid #999;
     }
     .reset-btn {
       margin-top: 20px;
-      background-color: #fff;
-      color: #ff007a;
+      background: #999;
+      color: #000;
       border: none;
       padding: 10px 20px;
       border-radius: 8px;
       font-size: 1em;
       cursor: pointer;
+      box-shadow: 0 0 8px #666;
+    }
+    .reset-btn:hover {
+      background: #bbb;
+    }
+    p {
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <h1>🎉 Bingo 18-nastkowe 🎉</h1>
-  <p>Dotknij pola, by je zaliczyć. Nie robisz? Pijesz!</p>
+  <h1>🖤 Bingo 18-nastkowe 🖤</h1>
+  <p>Dotknij pole — nie robisz, to pijesz!</p>
   <div class="grid" id="bingoGrid"></div>
   <button class="reset-btn" onclick="resetBoard()">Zresetuj planszę</button>
 
   <script>
     const tasks = [
       "Napij się z kimś, kogo nie znasz",
-      "Zaproś kogoś na \"prywatną rozmowę\" i nic nie mów przez 30 sekund",
+      "Zaproś kogoś na \"prywatną rozmowę\" i milcz",
       "Złóż komuś pikantny komplement 💋",
-      "Zatańcz jak striptizer(ka) przez 20 sekund",
+      "Zatańcz jak striptizer(ka)",
       "Powiedz: \"Ty tu z Tinderka?\"",
       "Zaproś babcię na shota",
-      "Zrób sexy zdjęcie i wyślij... sobie 📸",
+      "Zrób sexy zdjęcie i wyślij sobie 📸",
       "Udawaj, że masz fetysz na stopy",
-      "Przytul osobę, która ma dziwną koszulkę",
-      "Opowiedz historię o najgorszej randce",
+      "Przytul osobę w dziwnej koszulce",
+      "Opowiedz historię o randce z piekła rodem",
       "Wymyśl najgorszy flirt tekst ever",
-      "Zrób pole dance na lampie (lub udawaj) 🌟",
-      "Przyznaj, z kim byś się najchętniej pocałował(a)",
+      "Zrób pole dance na lampie (lub udawaj)",
+      "Przyznaj, z kim byś się pocałował(a)",
       "Złóż toast: \"Za seks i sałatkę jarzynową!\"",
       "Zaproś DJ-a o coś \"do łóżka\"",
       "Zaproś osobę obok na \"niewinne grzeszki\"",
       "Zatańcz z krzesłem przy wszystkich",
-      "Usiądź komuś na kolanach i nic nie tłumacz",
+      "Usiądź komuś na kolanach i milcz",
       "Zrób zdjęcie komuś bez pytania",
-      "Zrób dramatyczne wyjście z sali i wróć po 1 min",
+      "Zrób dramatyczne wyjście i wróć po 1 min",
       "Przebierz się za Martę z przyszłości",
       "Napisz komuś na czole \"SEXY\" szminką",
-      "Zatańcz na stole lub najbliższym podwyższeniu",
+      "Zatańcz na stole lub podwyższeniu",
       "Zadaj pytanie: \"To tu są orgie?\"",
-      "Zrób zdjęcie grupowe z hasłem \"18+\""
+      "Zrób zdjęcie grupowe z napisem \"18+\""
     ];
 
     const grid = document.getElementById("bingoGrid");
@@ -114,3 +126,4 @@
   </script>
 </body>
 </html>
+
