@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bingo 18-nastkowe</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff007a, #ffc300);
+      margin: 0;
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .cell {
+      background-color: rgba(255,255,255,0.1);
+      border: 2px solid #fff;
+      padding: 10px;
+      font-size: 0.85em;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cell.active {
+      background-color: #fff;
+      color: #000;
+      text-decoration: line-through;
+    }
+    .reset-btn {
+      margin-top: 20px;
+      background-color: #fff;
+      color: #ff007a;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Bingo 18-nastkowe 🎉</h1>
+  <p>Dotknij pola, by je zaliczyć. Nie robisz? Pijesz!</p>
+  <div class="grid" id="bingoGrid"></div>
+  <button class="reset-btn" onclick="resetBoard()">Zresetuj planszę</button>
+
+  <script>
+    const tasks = [
+      "Napij się z kimś, kogo nie znasz",
+      "Zaproś kogoś na \"prywatną rozmowę\" i nic nie mów przez 30 sekund",
+      "Złóż komuś pikantny komplement 💋",
+      "Zatańcz jak striptizer(ka) przez 20 sekund",
+      "Powiedz: \"Ty tu z Tinderka?\"",
+      "Zaproś babcię na shota",
+      "Zrób sexy zdjęcie i wyślij... sobie 📸",
+      "Udawaj, że masz fetysz na stopy",
+      "Przytul osobę, która ma dziwną koszulkę",
+      "Opowiedz historię o najgorszej randce",
+      "Wymyśl najgorszy flirt tekst ever",
+      "Zrób pole dance na lampie (lub udawaj) 🌟",
+      "Przyznaj, z kim byś się najchętniej pocałował(a)",
+      "Złóż toast: \"Za seks i sałatkę jarzynową!\"",
+      "Zaproś DJ-a o coś \"do łóżka\"",
+      "Zaproś osobę obok na \"niewinne grzeszki\"",
+      "Zatańcz z krzesłem przy wszystkich",
+      "Usiądź komuś na kolanach i nic nie tłumacz",
+      "Zrób zdjęcie komuś bez pytania",
+      "Zrób dramatyczne wyjście z sali i wróć po 1 min",
+      "Przebierz się za Martę z przyszłości",
+      "Napisz komuś na czole \"SEXY\" szminką",
+      "Zatańcz na stole lub najbliższym podwyższeniu",
+      "Zadaj pytanie: \"To tu są orgie?\"",
+      "Zrób zdjęcie grupowe z hasłem \"18+\""
+    ];
+
+    const grid = document.getElementById("bingoGrid");
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    function createBoard() {
+      grid.innerHTML = "";
+      const board = [...tasks];
+      shuffle(board);
+      for (let i = 0; i < 25; i++) {
+        const div = document.createElement("div");
+        div.className = "cell";
+        div.innerText = board[i];
+        div.onclick = () => div.classList.toggle("active");
+        grid.appendChild(div);
+      }
+    }
+
+    function resetBoard() {
+      createBoard();
+    }
+
+    createBoard();
+  </script>
+</body>
+</html>
