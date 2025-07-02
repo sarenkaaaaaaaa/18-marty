@@ -3,147 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bingo 18-nastkowe</title>
+  <title>Bingo Marty 🎉</title>
   <style>
-    :root {
-      --bg-dark: #000;
-      --bg-dark2: #1a1a1a;
-      --silver: #c0c0c0;
-      --highlight: #fff;
-      --cell-bg: linear-gradient(145deg, #999, #666);
-      --cell-active: #111;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, var(--bg-dark), var(--bg-dark2));
-      color: var(--silver);
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: silver;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
-      padding: 20px;
+      text-align: center;
+      padding: 1em;
     }
 
     h1 {
-      font-size: 2.4em;
-      margin: 20px 0 10px;
-      text-shadow: 0 0 10px #888;
-      color: var(--silver);
-      text-align: center;
+      font-size: 2em;
+      margin-bottom: 0.2em;
     }
 
     p {
-      color: #aaa;
-      margin-bottom: 20px;
+      margin-bottom: 1.5em;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      grid-template-columns: repeat(5, 1fr);
       gap: 10px;
       max-width: 600px;
       width: 100%;
     }
 
     .cell {
-      background: var(--cell-bg);
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 12px;
-      font-size: 0.9em;
-      text-align: center;
+      background: #111;
+      border: 2px solid silver;
+      padding: 20px;
       cursor: pointer;
-      transition: 0.3s;
+      border-radius: 10px;
+      transition: 0.2s;
       user-select: none;
+      font-size: 0.9em;
     }
 
     .cell:hover {
-      filter: brightness(1.1);
+      background: #222;
     }
 
     .cell.active {
-      background: var(--cell-active);
-      color: var(--silver);
-      text-decoration: line-through;
-      cursor: default;
+      background-color: silver;
+      color: black;
       pointer-events: none;
     }
 
     .reset-btn {
-      margin-top: 30px;
-      background: #999;
-      color: #000;
-      border: none;
+      margin-top: 20px;
       padding: 10px 20px;
+      background-color: silver;
+      color: black;
+      border: none;
       border-radius: 8px;
-      font-size: 1em;
       cursor: pointer;
-      box-shadow: 0 0 10px #444;
+      font-size: 1em;
     }
 
-    .reset-btn:hover {
-      background: #bbb;
+    .intro-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: silver;
+      font-size: 2em;
+      z-index: 999;
+      animation: fadeOut 2.5s ease forwards;
+      animation-delay: 1.8s;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
     }
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 1.8em;
-      }
-
       .cell {
-        font-size: 0.85em;
-        padding: 10px;
-      }
-
-      .grid {
-        gap: 8px;
+        padding: 14px;
+        font-size: 0.8em;
       }
     }
   </style>
 </head>
 <body>
-  <h1>🖤 Bingo Marty 18 🖤</h1>
-  <p>Nie robisz? To pijesz. Kliknij i nie ma odwrotu.</p>
-  <div class="grid" id="bingoGrid"></div>
-  <button class="reset-btn" onclick="resetBoard()">Zresetuj planszę</button>
+  <div id="intro" class="intro-screen">
+    <h2>🎉 Witaj na 18-stce Marty i Ewy! 🎉</h2>
+  </div>
 
+  <h1 style="display:none;">🖤 Bingo Marty i Ewy 18 🖤</h1>
+  <p style="display:none;">Miłej zabawy! 🎈</p>
+  <div class="grid" id="bingoGrid" style="display:none;"></div>
+  <button class="reset-btn" onclick="resetBoard()" style="display:none;">Zresetuj planszę</button>
+
+  <audio id="clapSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_88cc0243ee.mp3?filename=small-applause-6695.mp3"></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
     const tasks = [
-      "Napij się z kimś, kogo nie znasz",
-      "Zaproś kogoś na \"prywatną rozmowę\" i milcz",
-      "Złóż komuś pikantny komplement 💋",
-      "Zatańcz jak striptizer(ka)",
-      "Powiedz: \"Ty tu z Tinderka?\"",
-      "Zaproś babcię na shota",
-      "Zrób sexy zdjęcie i wyślij sobie 📸",
-      "Udawaj, że masz fetysz na stopy",
-      "Przytul osobę w dziwnej koszulce",
-      "Opowiedz historię o randce z piekła rodem",
-      "Wymyśl najgorszy flirt tekst ever",
-      "Zrób pole dance na lampie (lub udawaj)",
-      "Przyznaj, z kim byś się pocałował(a)",
-      "Złóż toast: \"Za seks i sałatkę jarzynową!\"",
-      "Zaproś DJ-a o coś \"do łóżka\"",
-      "Zaproś osobę obok na \"niewinne grzeszki\"",
-      "Zatańcz z krzesłem przy wszystkich",
-      "Usiądź komuś na kolanach i milcz",
-      "Zrób zdjęcie komuś bez pytania",
-      "Zrób dramatyczne wyjście i wróć po 1 min",
-      "Przebierz się za Martę z przyszłości",
-      "Napisz komuś na czole \"SEXY\" szminką",
-      "Zatańcz na stole lub podwyższeniu",
-      "Zadaj pytanie: \"To tu są orgie?\"",
-      "Zrób zdjęcie grupowe z napisem \"18+\""
+      "Napij się z mamą solenizantki",
+      "Zrób zdjęcie z 3 osobami naraz",
+      "Zatańcz z kimś z rodziny",
+      "Opowiedz żart i kogoś rozśmiesz",
+      "Wypij coś z kimś, kogo dopiero poznałeś/aś",
+      "Zrób selfie z solenizantką",
+      "Pocałuj kogoś w policzek",
+      "Zatańcz solo",
+      "Wypij kieliszek jednym duszkiem",
+      "Zaśpiewaj chociaż refren piosenki",
+      "Przybij piątkę 5 osobom",
+      "Powiedz toast",
+      "Zatańcz w parze",
+      "Opowiedz wspomnienie z Martą",
+      "Zrób śmieszne zdjęcie",
+      "Spróbuj każdego jedzenia",
+      "Zgub coś i to znajdź",
+      "Zatańcz z kimś starszym",
+      "Wypij coś różowego",
+      "Zrób szalone story na insta",
+      "Przypomnij sobie coś z dzieciństwa Marty",
+      "Przedstaw się komuś nowemu",
+      "Zatańcz w kółku",
+      "Zrób shot z 2 osobami naraz",
+      "Zatańcz na stole (albo krześle)"
     ];
 
     const grid = document.getElementById("bingoGrid");
+    const title = document.querySelector("h1");
+    const desc = document.querySelector("p");
+    const btn = document.querySelector(".reset-btn");
+    const clapSound = document.getElementById("clapSound");
 
     function shuffle(arr) {
       for (let i = arr.length - 1; i > 0; i--) {
@@ -163,6 +165,7 @@
         div.addEventListener("click", () => {
           if (!div.classList.contains("active")) {
             div.classList.add("active");
+            checkWin();
           }
         });
         grid.appendChild(div);
@@ -173,8 +176,43 @@
       createBoard();
     }
 
-    createBoard();
+    function checkWin() {
+      const active = document.querySelectorAll(".cell.active").length;
+      if (active === 5) {
+        clapSound.play();
+        confettiBoom();
+      }
+    }
+
+    function confettiBoom() {
+      const duration = 2 * 1000;
+      const end = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+      const interval = setInterval(() => {
+        const timeLeft = end - Date.now();
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+        }
+
+        confetti({
+          particleCount: 40,
+          origin: { x: Math.random(), y: Math.random() - 0.2 },
+          ...defaults
+        });
+      }, 200);
+    }
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("intro").style.display = "none";
+        title.style.display = "block";
+        desc.style.display = "block";
+        grid.style.display = "grid";
+        btn.style.display = "inline-block";
+        createBoard();
+      }, 2000);
+    });
   </script>
 </body>
 </html>
-
